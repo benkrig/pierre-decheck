@@ -253,7 +253,7 @@ def update_commit_status(owner, repo, sha, dependencies, host, are_dependencies_
 
         response = requests.request('POST', url, headers=HEADERS, data=json.dumps(data))
         print(response)
-        logger.info(
+        print(
             "Update status code: {}, response data: {}".format(response.status_code,
                                                                response.text))
     except Exception as e:
