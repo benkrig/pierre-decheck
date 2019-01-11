@@ -15,6 +15,7 @@ def webhook_event():
 
     print("Received request with headers \n{}and data: \n{}".format(request.headers, request.data))
     result = check(request.data, request.headers, request.environ.get("HTTP_HOST"))
+    print(result)
     return result.get("body"), result.get("statusCode")
 
 

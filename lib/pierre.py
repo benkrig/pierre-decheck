@@ -24,6 +24,7 @@ logger.setLevel(logging.INFO)
 
 def check(payload, headers, host):
     verification, reply = verify_source_is_github(payload, headers)
+    print(verification, reply)
     if not verification:
         return reply
 
@@ -36,7 +37,7 @@ def check(payload, headers, host):
         state = get_dependency_state(dependency_id=dep, owner=owner, repo=repo)
         dependencies_and_states.append((dep, state))
 
-        logger.info("Owner: {}, Repo: {}. Dependencies: {}".format(
+        print("Owner: {}, Repo: {}. Dependencies: {}".format(
             owner,
             repo,
             dependencies_and_states
@@ -251,11 +252,12 @@ def update_commit_status(owner, repo, sha, dependencies, host, are_dependencies_
         logger.info("Update commit status: URL: {} \n Data: {}".format(url, data))
 
         response = requests.request('POST', url, headers=HEADERS, data=json.dumps(data))
-
+        print(response)
         logger.info(
             "Update status code: {}, response data: {}".format(response.status_code,
                                                                response.text))
-    except Exception:
+    except Exception as e:
+        print(e)
         logger.error("Problem with updating commit", exc_info=True)
 
 
