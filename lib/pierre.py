@@ -249,7 +249,7 @@ def update_commit_status(owner, repo, sha, dependencies, host, are_dependencies_
             "context": CONTEXT
         }
 
-        logger.info("Update commit status: URL: {} \n Data: {}".format(url, data))
+        print("Update commit status: URL: {} \n Data: {}".format(url, data))
 
         response = requests.request('POST', url, headers=HEADERS, data=json.dumps(data))
         print(response)
